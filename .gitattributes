@@ -1,0 +1,22 @@
+# Set default behavior to automatically normalize line endings
+* text=auto eol=lf
+
+# Python files
+*.py linguist-language=Python eol=lf
+
+# Jupyter Notebook files
+*.ipynb linguist-language=Jupyter Notebook eol=lf
+
+# Ignore binary files
+*.pyc binary
+*.pyo binary
+*.pyd binary
+
+# Handle line endings for shell scripts
+*.sh eol=lf
+
+# SQL files
+*.sql linguist-language=SQL eol=lf
+
+# CSV files
+*.csv linguist-language=CSV eol=lf

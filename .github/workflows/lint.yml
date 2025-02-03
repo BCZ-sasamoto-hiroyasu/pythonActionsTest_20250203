@@ -1,0 +1,50 @@
+name: Lint
+
+on:
+  pull_request:
+    branches:
+      - "**" # すべてのブランチを対象
+    types:
+      - opened         # PRが作成されたとき
+      - synchronize    # PRのブランチが更新されたとき（例: 新しいコミットがプッシュされたとき）
+      - reopened       # 閉じられたPRが再オープンされたとき
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      
+      - name: Cache Python dependencies # pipのキャッシュを保存 (requirements.txtが変更された場合にはキャッシュを削除)
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies # requirements.txtに記載されたパッケージをインストール
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Black and annotate PR # フォーマッタが適用されているかを確認
+        uses: reviewdog/action-black@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          level: warning
+
+      - name: Run Flake8 and annotate PR # Linterでコードチェック
+        uses: reviewdog/action-flake8@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-check,github-pr-review # PRにコメントをつける
+          level: error
+          fail_on_error: true # エラーがあった場合には失敗とする

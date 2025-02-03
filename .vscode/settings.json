@@ -1,0 +1,35 @@
+{
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[yml]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    },
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.black-formatter",
+      "editor.formatOnSave": true
+    },
+    "black-formatter.args": [
+      "--line-length",
+      "88",
+      "--target-version",
+      "py313",
+      "--skip-string-normalization"
+    ],
+    "flake8.args": [
+      "--max-line-length=88",
+      "--ignore=E203,W503,W504"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": ["tests"],
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always"
+    }
+  }

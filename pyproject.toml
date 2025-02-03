@@ -1,0 +1,4 @@
+[tool.black]
+line-length = 88
+target-version = ['py313'] # 使用するPythonのバージョンに合わせて変更
+skip-string-normalization = false # 文字列の正規化をスキップするかどうか(文字列のクォートを変更するかどうか)
