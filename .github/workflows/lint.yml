@@ -45,6 +45,6 @@ jobs:
         uses: reviewdog/action-flake8@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-check,github-pr-review # PRにコメントをつける
+          reporter: github-pr-review
           level: error
-          fail_on_error: true # エラーがあった場合には失敗とする
+          fail_level: error # エラーがあった場合には失敗とする
